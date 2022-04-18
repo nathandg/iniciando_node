@@ -11,6 +11,12 @@ app.get('/', (req, res) => {
     res.send('hello world!')
 })
 
+app.post('/', (req, res) => {
+    const request = req.body;
+    console.log(request);
+    res.status(201).send();
+})
+
 app.listen(port, (req, res) => {
     console.log(`server working in ${port} port`)
 })
