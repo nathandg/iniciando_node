@@ -11,7 +11,30 @@ let dummyCount = 0;
 let moistures = [];
 
 app.get('/', (req, res) => {
-    res.send(moistures);
+    res.status(200).send(moistures);
+})
+
+/*
+    parameter:
+    app.get('/:id')
+    const id = req.params.id
+    forma de passar na url: http://localhost:4002/1
+
+    query:
+    app.get('/')
+    const id = req.query.id
+    forma de passar na url: http://localhost:4002/?id=1
+
+*/
+
+
+app.get('/:id', (req, res) => {
+    const id = req.params.id
+    console.log(id);
+    const moistureById = moistures.filter(temperature => temperature.id == id);
+    console.log("buscando");
+    console.log(moistureById);
+    res.status(200).send(moistureById);
 })
 
 app.post('/', (req, res) => {
