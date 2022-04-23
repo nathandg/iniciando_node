@@ -1,16 +1,11 @@
-const express = require('express')
-const app = express();
-const cors = require('cors');
-const { json } = require('body-parser');
-const port = 4002;
-
-app.use(cors());
-app.use(json());
+const express = require("express");
+const router = express.Router()
 
 let dummyCount = 0;
 let moistures = [];
 
-app.get('/', (req, res) => {
+//requisição do array moisture
+router.get('/', (req, res) => {
     res.status(200).send(moistures);
 })
 
@@ -27,17 +22,15 @@ app.get('/', (req, res) => {
 
 */
 
-
-app.get('/:id', (req, res) => {
+//requisição de moisture por id
+router.get('/:id', (req, res) => {
     const id = req.params.id
-    console.log(id);
     const moistureById = moistures.filter(temperature => temperature.id == id);
-    console.log("buscando");
-    console.log(moistureById);
     res.status(200).send(moistureById);
 })
 
-app.post('/', (req, res) => {
+//requisição adicionar dados de moisture
+router.post('/', (req, res) => {
     
     const request = req.body;
     
@@ -52,12 +45,13 @@ app.post('/', (req, res) => {
     res.status(201).send();
 })
 
-app.delete('/', (req, res) => {
+//deletar moisture
+router.delete('/', (req, res) => {
     moistures = [];
     res.status(200).send();
 })
 
-app.put('/:value', (req, res) => {
+router.put('/:value', (req, res) => {
     const value = req.params.value
     const id = req.query.id
     console.log(`QUERY IS ${id} AND PARAMETER IS ${value}`)
@@ -72,6 +66,4 @@ app.put('/:value', (req, res) => {
     res.status(200).send()
 })
 
-app.listen(port, (req, res) => {
-    console.log(`server working in ${port} port`)
-})
+module.exports = router
