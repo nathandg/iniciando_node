@@ -10,7 +10,7 @@ app.use(json());
 let moistures = [];
 
 app.get('/', (req, res) => {
-    res.send(`moisture => ${moistures}`)
+    res.send(`moistures: ${moistures}`)
 })
 
 app.post('/', (req, res) => {
@@ -22,7 +22,7 @@ app.post('/', (req, res) => {
 
 app.delete('/', (req, res) => {
     moistures = [];
-    moistures.status(200).send();
+    res.status(200).send();
 })
 
 app.listen(port, (req, res) => {
