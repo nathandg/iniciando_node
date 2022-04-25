@@ -2,7 +2,12 @@
 const express = require("express");
 const router = express.Router()
 
+//validação
 const expressValidator = require('express-validator')
+
+//mongoose
+const Moistures = require('../models/dataBase');
+
 
 let dummyCount = 0;
 let moistures = [];
@@ -48,17 +53,16 @@ router.post('/', [validate],(req, res) => {
     if(!erros.isEmpty()){
         return res.status(422).send({erros: erros.array()})
     }
-    const request = req.body;
     
-    //created obj
-    const moisturesObj = {
+    console.log(req.body.moisture);
 
-        id: dummyCount += 1,
-        moisture: request.moisture
-    }
-    console.log(moisturesObj);
-    moistures.push(moisturesObj);
-    res.status(201).send();
+    const moistures = new Moistures({
+        moistures: req.body.moisture
+    })
+
+    moistures.save().then(() => {
+        res.status(200).send()
+    })
 })
 
 //deletar moisture
