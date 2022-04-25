@@ -9,20 +9,19 @@ const expressValidator = require('express-validator')
 const Moistures = require('../models/dataBase');
 
 
-let dummyCount = 0;
-let moistures = [];
-
 //define o que será validado como ".check" verifica se há temperature, ".isLength" verifica se não é nulo e ".withMessage" menssagem de erro.
-
 const validate = [
     expressValidator.check('moisture').isLength({min: 1}).withMessage('Field temperature can not be null')
 ]
 
-//Routes
 
 //requisição do array moisture
 router.get('/', (req, res) => {
-    res.status(200).send(moistures);
+    Moistures.find().then(moistures => {
+        res.status(200).send(moistures);
+    }).catch(err => {
+        res.status(500).send(err)
+    })
 })
 
 /*
@@ -48,13 +47,11 @@ router.get('/:id', (req, res) => {
 //requisição adicionar dados de moisture
 router.post('/', [validate],(req, res) => {
     
-    
     const erros = expressValidator.validationResult(req);
     if(!erros.isEmpty()){
         return res.status(422).send({erros: erros.array()})
     }
     
-    console.log(req.body.moisture);
 
     const moistures = new Moistures({
         moistures: req.body.moisture
