@@ -1,8 +1,19 @@
+//Imports and configs
 const express = require("express");
 const router = express.Router()
 
+const expressValidator = require('express-validator')
+
 let dummyCount = 0;
 let moistures = [];
+
+//define o que será validado como ".check" verifica se há temperature, ".isLength" verifica se não é nulo e ".withMessage" menssagem de erro.
+
+const validate = [
+    expressValidator.check('moisture').isLength({min: 1}).withMessage('Field temperature can not be null')
+]
+
+//Routes
 
 //requisição do array moisture
 router.get('/', (req, res) => {
@@ -30,8 +41,13 @@ router.get('/:id', (req, res) => {
 })
 
 //requisição adicionar dados de moisture
-router.post('/', (req, res) => {
+router.post('/', [validate],(req, res) => {
     
+    
+    const erros = expressValidator.validationResult(req);
+    if(!erros.isEmpty()){
+        return res.status(422).send({erros: erros.array()})
+    }
     const request = req.body;
     
     //created obj
