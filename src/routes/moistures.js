@@ -8,15 +8,14 @@ const expressValidator = require('express-validator')
 //mongoose
 const Moistures = require('../models/dataBase');
 
-
 //define o que será validado como ".check" verifica se há temperature, ".isLength" verifica se não é nulo e ".withMessage" menssagem de erro.
 const validate = [
     expressValidator.check('moisture').isLength({min: 1}).withMessage('Field temperature can not be null')
 ]
 
-
 //requisição do array moisture
 router.get('/', (req, res) => {
+
     Moistures.find().then(moistures => {
         res.status(200).send(moistures);
     }).catch(err => {

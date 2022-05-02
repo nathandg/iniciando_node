@@ -8,10 +8,12 @@ const server = express()
 const port = 4002
 
 const moistureRoute = require('./routes/moistures')
+const usersRoute = require('./routes/usuario')
 
 server.use(json());
 server.use(cors());
 server.use('/moistures', moistureRoute);
+server.use('/user', usersRoute);
 
 server.get('/', (req, res) => {
     res.status(200).sendFile(path.join(__dirname, 'views', 'index.html'))
