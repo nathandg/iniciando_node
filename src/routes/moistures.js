@@ -69,18 +69,17 @@ router.delete('/', (req, res) => {
 })
 
 router.put('/:value', (req, res) => {
-    const value = req.params.value
-    const id = req.query.id
-    console.log(`QUERY IS ${id} AND PARAMETER IS ${value}`)
-    
-    moistures.map(moisture => {
-         if(moisture.id == id){
-             console.log(`FOUND ID ${id} CHANGING VALUE OF OBJECT`)
-             moisture.moisture = parseInt(value);
-         }
-     });
+    const pathValue = req.params.value
 
-    res.status(200).send()
+    Moistures.findById(req.query.id).then(obj => {
+        obj.moistures = pathValue
+        obj.save().then(result => {
+            res.status(200).send(result)
+        })
+    }).catch( error => {
+        res.status(404).send()
+    })
+
 })
 
 module.exports = router
