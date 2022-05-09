@@ -39,7 +39,7 @@ const check = [
         } else {
           console.log("senha correta");
 
-          const token = jwt.sign({ userId: userId }, SECRET, { expiresIn: 30 });
+          const token = jwt.sign({ userId: userId }, SECRET, { expiresIn: 300 });
           return res.json({ auth: true, token });
 
           next();
@@ -59,7 +59,7 @@ userRouter.post("/login", check, (req, res) => {
 //teste acesso
 userRouter.get('/teste', verifyJWT, (req, res) => {
     
-    console.log(req.userId + 'fez esta chamada!\n')
+    console.log(req.userId + ' fez esta chamada!\n')
 
     Users.find().then(result => {
         res.status(200).send(result);
