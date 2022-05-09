@@ -63,8 +63,9 @@ router.post('/', [validate],(req, res) => {
 
 //deletar moisture
 router.delete('/', (req, res) => {
-    moistures = [];
-    res.status(200).send();
+    Moistures.deleteMany().then(result => {
+        res.status(200).send()
+    });
 })
 
 router.put('/:value', (req, res) => {
