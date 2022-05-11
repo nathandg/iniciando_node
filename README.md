@@ -30,7 +30,7 @@
 
    1. Abstração
 
-      * è a capacidade de se extrair dos itens presentes no contexto, suas principais criando, dessa forma, objetos.
+      * é a capacidade de se extrair dos itens presentes no contexto, suas principais características criando, dessa forma, objetos.
 
    2. Encapsulamento
 
