@@ -34,7 +34,7 @@
 
    2. Encapsulamento
 
-        * O encapsulamento se da por metodos de um objeto que não estão visiveis a outros objetos, ou seja ao encapsular os dados evita que estes sofram acessos indevidos. Por exemplo em um aplicação bancária se os atributos do saldo não estiver encapsulado, poderá ser alterado sem passar pelo metodo de depositar.
+        * O encapsulamento, se da por metodos de um objeto que não estão visiveis a outros objetos, ou seja ao encapsular os dados evita que estes sofram acessos indevidos. Por exemplo em um aplicação bancária se os atributos do saldo não estiver encapsulado, poderá ser alterado sem passar pelo metodo de depositar.
 
    3. Herança
 
