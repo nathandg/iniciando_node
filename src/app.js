@@ -21,7 +21,7 @@ server.get('/', (req, res) => {
 
 //servidor será iniciado se a conexão com o DataBase, for aceita;
 const main = async () => {
-    await mongoose.connect('mongodb+srv://user:userpassword@cluster0.0fv5u.mongodb.net/myFirstDatabase?retryWrites=true&w=majority');
+    await mongoose.connect(`mongodb+srv://admin:${process.env.MY_USER}@cluster0.0fv5u.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`);
 }
 
 main().then(() => {
